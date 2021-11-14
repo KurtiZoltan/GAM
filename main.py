@@ -56,6 +56,10 @@ eta = np.array([
     [1.765, 45.18e-4, 8.758e-2],
 ]).transpose()
 
+plt.errorbar(eta[0], eta[1], yerr=eta[2]*eta[1], fmt=".")
+plt.grid()
+plt.show()
+
 def intensity(x, t):
     I = x[1] / (x[3] * x[4] * t)
     dI = I * np.sqrt(x[2]**2 + x[5]**2)
