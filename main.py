@@ -11,6 +11,7 @@ calibration = np.array([
     ]).transpose()
 
 #granite
+graniteTime = 1000
 #energy (keV), net area, net area rel. error, I, eta, eta rel. error
 granite = np.array([
     [351.32, 36043, 0.59e-2, 3.68936e-1, 219.75e-4, 9.045e-2], #214Pb
@@ -33,6 +34,7 @@ graniteElements = [
 ]
     
 #soil sample from nuclear explosion
+soilTime = 911
 #energy (keV), net area, net area rel. error, I, eta, eta rel. error
 soil = np.array([
     [658.48 , 407, 5.65e-2, 0.899800, 110.82e-4, 8.559e-2], #134Cs (gamma coming from 134Ba)
@@ -95,7 +97,7 @@ def printPeakActivity(data, t, dataElements):
         print(f"            ${row[0]:.1f}$ & ${a[0]/1000:.1f}$ & ${a[1]/1000:.1f}$ & {isotope} \\\\")
 
 print("Granite peaks:")
-printPeakActivity(granite, 1000, graniteElements)
+printPeakActivity(granite, graniteTime, graniteElements)
 
 def printPeakActivity(data, t, dataElements):
     A = intensity(data, t)
@@ -103,4 +105,24 @@ def printPeakActivity(data, t, dataElements):
         print(f"            ${row[0]:.1f}$ & ${a[0]:.1f}$ & ${a[1]:.1f}$ & {isotope} \\\\")
 
 print("Soil peaks:")
-printPeakActivity(soil, 911, soilElements)
+printPeakActivity(soil, soilTime, soilElements)
+
+granitePeaks = intensity(granite, graniteTime)
+pbPeaks = np.array([granitePeaks[0], granitePeaks[3], granitePeaks[6]])
+biPeaks = np.array([granitePeaks[4], granitePeaks[5]])
+beforeRnPeaks = np.array([granitePeaks[1], granitePeaks[2]])
+afterRnPeaks = np.array([granitePeaks[0], granitePeaks[3], granitePeaks[4], granitePeaks[5], granitePeaks[6]])
+
+def average(data):
+    avg = np.sum(data[:, 0] / data[:, 1]**2) / np.sum(1 / data[:, 1]**2)
+    sigma = 1 / np.sqrt(np.sum(1 / data[:, 1]**2))
+    return avg, sigma
+
+pb, dpb = average(pbPeaks)
+print("Pb: ", pb, "+/-", dpb)
+bi, dbi = average(biPeaks)
+print("Bi: ", bi, "+/-", dbi)
+beforeRn, dbeforeRn = average(beforeRnPeaks)
+print("Before Rn: ", beforeRn, "+/-", dbeforeRn)
+afterRn, dafterRn = average(afterRnPeaks)
+print("After Rn: ", afterRn, "+/-", dafterRn)
