@@ -90,10 +90,19 @@
 	\tableofcontents
 	\newpage
 	\section{Introduction}
-	\subsection{}
-	
+		The goal of this laboratory class was to to measure the gamma radiation emitted by radioactive isotopes. Alpha and beta decays release energy on the order of one up to a couple MeV. Based on the measured spectrums both the isotope type and the activity of the isotope can be determined.
+	\subsection{Measurement setup}
+		The two main parts of the measurement setup were the HPGe detector and the amplitude analyzer. HPGe stands for high purity germanium, this makes up the bulk of the detector. Incoming ionizing radiation creates electron-hole pairs. The number of created pairs is to good approximation proportional to the energy absorbed by the semiconductor. The detector is indirectly connected to a liquid nitrogen bath, which cools down the detector considerably. This makes it that thermal fluctuations don't create a significant number of electron-hole pairs, so the only source of current that is measured comes from electron-hole pairs created by the ionizing radiation. These pairs are prohibited from recombining by the high voltage connected to the germanium detector.
+		
+		The other key component is the amplitude analyzer. It measures the charge carried by electric impulses. This charge is directly proportional to the number of electron-hole pairs created during the time interval of the pulse and therefore characteristic of the energy of the incoming radiation. Based on this charge the amplitude analyzer chooses the corresponding energy bin, and increments the counter corresponding to that bin by one. Finally this analyzer is connected to a computer, where the data is interpreted and displayed. The relation between the bin numbers and the energy of the radiation is expected to be linear, but the exact parameters of the relation are not known before calibration.
+	\section{Calibration}
+		To determine the parameters of the linear relation between bin number and energy peaks with known energy are needed to be measured. During our measurement we used $^{232}\text{Th}$ isotope. The energy of two easily identifiable gamma peaks is known The first one is $238.6\text{keV}$, this is the peak with the largest intensity. The other characteristic peak is at $2614.7keV$, this is the highest energy peak observed. These peaks were identified in the spectrum. To validate the identification of peaks, after using the two peaks to calibrate the linear relation between energy and bin number, other peaks of the $^{232}\text{Th}$ isotope were identified and we checked if their energy matches up with the values read off from tables. These other peaks were at $580keV$ and $908keV$ according to the calibration. These are the $583.191keV$ and $911.316keV$ peaks respectively, both corresponding to $^{208}\text{Tl}$, which is part of the thorium series. The linear fit for energy was
+		\begin{equation}
+			E = 1.3247keV \cdot n - 4.6keV,
+		\end{equation}
+		where $n$ is the bin number. From the validation we know the energy measured from the bin number is accurate within a couple $keV$. This is precise enough to identify peaks. The source of the error is that the current impulse coming fro the HPGe detector isn't exactly in linear relation with the energy absorbed by the detector.
 	\section{Granite sample}
-	
+		The first sample we examined after calibration was a granite rock sample.
 	\section{Soil sample}
 	
 	
