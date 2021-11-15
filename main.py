@@ -14,13 +14,23 @@ calibration = np.array([
 #energy (keV), net area, net area rel. error, I, eta, eta rel. error
 granite = np.array([
     [351.32, 36043, 0.59e-2, 3.68936e-1, 219.75e-4, 9.045e-2], #214Pb
-    [999.07, 620, 14.24e-2, 5.89230e-3  , 84.57e-4, 7.572e-2], #234Pa
+    [999.07, 620, 14.24e-2, 5.89230e-3 ,  84.57e-4, 7.572e-2], #234Pa
     [186.69, 12230, 1.11e-2, 3.28000e-2, 313.71e-4, 9.099e-2], #226Ra
     [294.96, 23525, 0.88e-2, 1.91873e-1, 204.25e-4, 6.595e-2], #214Pb
     [1765.08, 4430, 1.91e-2, 1.61967e-1, 45.18e-4, 8.758e-2], #214Bi 
     [1118.60, 5706, 2.02e-2, 1.54967e-1, 70.23e-4, 9.289e-2], #214Bi
     [242.14, 10554, 1.74e-2, 7.45288e-2, 260.91e-4, 8.704e-2] #214Pb
     ])
+
+graniteElements = [
+    "$^{214}\\text{Pb}$", 
+    "$^{234}\\text{Pa}$", 
+    "$^{226}\\text{Ra}$", 
+    "$^{214}\\text{Pb}$", 
+    "$^{214}\\text{Bi}$", 
+    "$^{214}\\text{Bi}$", 
+    "$^{214}\\text{Pb}$", 
+]
     
 #soil sample from nuclear explosion
 #energy (keV), net area, net area rel. error, I, eta, eta rel. error
@@ -31,7 +41,16 @@ soil = np.array([
     [1405.34, 27, 22.83e-2, 0.207470, 45.23e-4, 8.897e-2], #152Eu
     [776.66 , 50, 22.45e-2, 0.127410, 91.76e-4, 8.884e-2], #152Eu
     [244.89 , 65, 14.60e-2, 0.074935, 254.73e-4, 9.466e-2] #152Eu
-    ]).transpose()
+    ])
+
+soilElements = [
+    "$^{134}\\text{Cs}$ ($^{134}\\text{Ba}$)",
+    "$^{152}\\text{Eu}$", 
+    "$^{152}\\text{Eu}$", 
+    "$^{152}\\text{Eu}$", 
+    "$^{152}\\text{Eu}$", 
+    "$^{152}\\text{Eu}$", 
+    ]
 
 #intensity
 #energy (MeV), eta, eta rel. error
@@ -56,14 +75,32 @@ eta = np.array([
     [1.765, 45.18e-4, 8.758e-2],
 ]).transpose()
 
-plt.errorbar(eta[0], eta[1], yerr=eta[2]*eta[1], fmt=".")
-plt.grid()
-plt.show()
-
 def intensity(x, t):
-    I = x[1] / (x[3] * x[4] * t)
-    dI = I * np.sqrt(x[2]**2 + x[5]**2)
-    return np.array([I, dI])
+    I = x[:,1] / (x[:,3] * x[:,4] * t)
+    dI = I * np.sqrt(x[:,2]**2 + x[:,5]**2)
+    return np.array([I, dI]).transpose()
 
-for x in granite:
-    print(intensity(x, 1000))
+def printTable(table, isotopes):
+    for row, isotope in zip(table, isotopes):
+        print(f"            ${row[0]:.1f}$ & ${int(row[1]):d}$ & ${row[2]*100:.1f}\\%$ & {row[3]:.3e} & ${row[4]*100:.4f}\\%$ & ${row[5]*100:.1f}\\%$ & {isotope} \\\\")
+
+print("Granite data:")
+printTable(granite, graniteElements)
+print("Soil data:")
+printTable(soil, soilElements)
+
+def printPeakActivity(data, t, dataElements):
+    A = intensity(data, t)
+    for row, isotope, a in zip(data, dataElements, A):
+        print(f"            ${row[0]:.1f}$ & ${a[0]/1000:.1f}$ & ${a[1]/1000:.1f}$ & {isotope} \\\\")
+
+print("Granite peaks:")
+printPeakActivity(granite, 1000, graniteElements)
+
+def printPeakActivity(data, t, dataElements):
+    A = intensity(data, t)
+    for row, isotope, a in zip(data, dataElements, A):
+        print(f"            ${row[0]:.1f}$ & ${a[0]:.1f}$ & ${a[1]:.1f}$ & {isotope} \\\\")
+
+print("Soil peaks:")
+printPeakActivity(soil, 911, soilElements)
