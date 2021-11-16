@@ -84,7 +84,7 @@ def intensity(x, t):
 
 def printTable(table, isotopes):
     for row, isotope in zip(table, isotopes):
-        print(f"            ${row[0]:.1f}$ & ${int(row[1]):d}$ & ${row[2]*100:.1f}\\%$ & {row[3]:.3e} & ${row[4]*100:.4f}\\%$ & ${row[5]*100:.1f}\\%$ & {isotope} \\\\")
+        print(f"            ${row[0]:.1f}$ & ${int(row[1]):d}$ & ${row[2]*100:.1f}\\%$ & {row[3]:.3e} & ${row[4]*100:.3f}\\%$ & ${row[5]*100:.1f}\\%$ & {isotope} \\\\")
 
 print("Granite data:")
 printTable(granite, graniteElements)
@@ -127,15 +127,15 @@ print("Before Rn: ", beforeRn, "+/-", dbeforeRn)
 afterRn, dafterRn = average(afterRnPeaks)
 print("After Rn-: ", afterRn, "+/-", dafterRn)
 
-print("Table of averages:")
+print("Table of averages for granite:")
 print(f"            $^{{214}}\\text{{Pb}}$ & {pb:.0f} & {dpb:.0f} \\\\")
 print(f"            $^{{214}}\\text{{Bi}}$ & {bi:.0f} & {dbi:.0f} \\\\")
 print(f"            Before $^{{222}}\\text{{Rn}}$ & {beforeRn:.0f} & {dbeforeRn:.0f} \\\\")
 print(f"            After $^{{222}}\\text{{Rn}}$ & {afterRn:.0f} & {dafterRn:.0f} \\\\")
 
-plt.errorbar(np.arange(0, pbPeaks.shape[0]), pbPeaks[:, 0], yerr=pbPeaks[:, 1], fmt="o", label="Lead peaks activity")
+plt.errorbar(np.arange(0, pbPeaks.shape[0]), pbPeaks[:, 0], yerr=pbPeaks[:, 1], fmt="o", label="Lead peaks' activity")
 plt.errorbar(pbPeaks.shape[0], pb, yerr=dpb, fmt="o", label="Averaged lead activity")
-plt.errorbar(np.arange(0, biPeaks.shape[0]) + pbPeaks.shape[0] + 1, biPeaks[:, 0], yerr=biPeaks[:, 1], fmt="o", label="Bizmuth peaks activity")
+plt.errorbar(np.arange(0, biPeaks.shape[0]) + pbPeaks.shape[0] + 1, biPeaks[:, 0], yerr=biPeaks[:, 1], fmt="o", label="Bismuth peaks' activity")
 plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 1, bi, yerr=dbi, fmt="o", label="Averaged bismuth activity")
 plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 2, afterRn, yerr=dafterRn, fmt="o", label="Averaged activity after radon")
 plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 3, granitePeaks[1, 0], yerr=granitePeaks[1, 1], fmt="o", label="Protactinium activity")
@@ -167,3 +167,17 @@ lambda235 = np.log(2) / (7.04e8 * 365 * 24 * 3600)
 
 print("235 contribution to 186keV peak:", 0.007 * lambda235 / (0.007 * lambda235 + 0.993 * lambda238))
 print("186keV peak rel. error:", granitePeaks[2, 1] / granitePeaks[2, 0])
+
+soilPeaks = intensity(soil, soilTime)
+eu, deu = average(soilPeaks[1:])
+
+plt.errorbar(np.arange(soilPeaks.shape[0]-1), soilPeaks[1:, 0], yerr=soilPeaks[1:, 0], fmt="o", label="Europium peaks' activity")
+plt.errorbar(soilPeaks.shape[0]-1, eu, yerr=deu, fmt="o", label="Averaged europium activity")
+plt.errorbar(soilPeaks.shape[0], soilPeaks[0, 0], yerr=soilPeaks[0, 0], fmt="o", label="Caesium activity")
+plt.legend()
+plt.grid()
+plt.ylabel("A [$Bq$]")
+plt.savefig("./figs/soilactivities.pdf")
+plt.show()
+
+print(f"Europium {eu}+/-{deu}")

@@ -83,8 +83,8 @@
 	%\centerline{\includegraphics[scale=0.5]{./elte_cimer_color.pdf}}
 	\vskip0.4truein
 	\centerline{\Large Group B}\vskip0.2truein
-	\centerline{\Large{Measurement date: 2021.11.04.}}\vskip0.2truein
-	\centerline{\Large{Hand in date: 2021.11.15.}}\vskip0.2truein
+	\centerline{\Large{Measurement date: November 4, 2021.}}\vskip0.2truein
+	\centerline{\Large{Hand in date: \today}}\vskip0.2truein
 	\thispagestyle{empty}
 	\newpage
 	\tableofcontents
@@ -137,7 +137,7 @@
 			\hline
 			Energy [$keV$] & Activity [$kBq$]& Activity error [$kBq$]& Isotope \\
 			\hline
-                        $351.3$ & $4.4$ & $0.4$ & $^{214}\text{Pb}$ \\
+            $351.3$ & $4.4$ & $0.4$ & $^{214}\text{Pb}$ \\
             $999.1$ & $12.4$ & $2.0$ & $^{234}\text{Pa}$ \\
             $186.7$ & $11.9$ & $1.1$ & $^{226}\text{Ra}$ \\
             $295.0$ & $6.0$ & $0.4$ & $^{214}\text{Pb}$ \\
@@ -204,6 +204,7 @@
 		\end{equation}
 		where $\lambda = \frac{\log(2)}{T_{1/2}} = 4.92\cdot 10^{-18}\frac{1}{s}$ is the decay rate of $^{238}\text{U}$. From this the number of $^{238}\text{U}$ atoms in the granite sample is $(2.44\pm0.19)\cdot 10^{21}$, which corresponds to a mass of $(0.966\pm0.077)g$ $^{238}\text{U}$ in the granite sample. With the mass of the granite sample The concentration of $^{238}\text{U}$ could be given in gram/ton units.
 	\section{Soil sample}
+		The data of the measured peaks from the soil sample are summarized in table \ref{soildata}.
 		\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -219,9 +220,36 @@
             $244.9$ & $65$ & $14.6\%$ & 7.494e-02 & $2.5473\%$ & $9.5\%$ & $^{152}\text{Eu}$ \\
 			\hline
 		\end{tabular}
-		\caption{Soil sample data}
+		\caption{Soil sample data. The $658.5keV$ peak is emitted by $^{134}\text{Ba}$ after a $^{134}\text{Cs}$ beta decays.}
+		\label{soildata}
 		\end{table}
+		The first peak is emitted by a transition of the barium atom, after a cesium atom decays into it. The activities can be calculated in the same ways as for the granite sample. The results are listed in table \ref{soilpeaks}.
+		\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			Energy [$keV$] & Activity [$kBq$]& Activity error [$kBq$]& Isotope \\
+			\hline
+            $658.5$ & $44.8$ & $4.6$ & $^{134}\text{Cs}$ ($^{134}\text{Ba}$) \\
+            $120.9$ & $51.0$ & $5.2$ & $^{152}\text{Eu}$ \\
+            $343.4$ & $43.3$ & $5.5$ & $^{152}\text{Eu}$ \\
+            $1405.3$ & $31.6$ & $7.7$ & $^{152}\text{Eu}$ \\
+            $776.7$ & $46.9$ & $11.3$ & $^{152}\text{Eu}$ \\
+            $244.9$ & $37.4$ & $6.5$ & $^{152}\text{Eu}$ \\
+            \hline
+		\end{tabular}
+		\caption{The activities corresponding to peaks in the soil sample. The $658.5keV$ peak is emitted by $^{134}\text{Ba}$ after a $^{134}\text{Cs}$ beta decays.}
+		\label{soilpeaks}
+		\end{table}
+		Averaging the europium peaks' activities as in the case of the granite sample I got $(43.2\pm 2.9)Bq$. These activities are visually represented by figure \ref{soilaveragesfig}.
+			\begin{figure}[H]
+			\centering
+			\includegraphics[scale=1]{./figs/soilactivities.pdf}
+			\caption{Graphical representation of activities and errors corresponding to peaks and their averages.}
+			\label{soilaveragesfig}
+		\end{figure}
 	\section{Conclusion}
+		The lab introduced us to gamma spectroscopy and analyzing the data obtained. In the first part we calibrated the measurement with a thorium sample. The next part was about taking the spectrum of a granite sample and identifying the peaks seen. During evaluation I concluded that a significant portion of the radon gas escapes the sample and that the $186keV$ radium peak is consistent with a $0.7\%$ 235 uranium isotope content (out of all the uranium atoms). I also determined the uranium content of the sample. Finally I repeated some of the calculations for a soil sample from near a nuclear bomb test.
 	\bibliographystyle{abeld}
-    \bibliography{ref}
+    %\bibliography{ref}
 \end{document}
