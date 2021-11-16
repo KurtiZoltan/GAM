@@ -149,6 +149,36 @@
 		\caption{The activities corresponding to peaks in the granite sample.}
 		 \label{granitepeaks}
 		\end{table}
+		Corresponding peaks can be averaged. The correct way to calculate the average given that we know the uncertainties is the following,
+		\begin{equation}
+			\langle A\rangle = \frac{\sum_i A_i / \sigma_i^2}{\sum_i 1 / \sigma_i^2}.
+		\end{equation}
+		The uncertainty of this averaged number is
+		\begin{equation}
+			\sigma(\langle A\rangle) = \frac{1}{\sqrt{\sum_i 1 / \sigma_i^2}}.
+		\end{equation}
+		With the above formula I determined the combined activity of the lead and bismuth isotopes. To determine if a significant fraction of the radon gas escapes the granite sample I also calculated the weighted average of the isotopes before and after the radon in the decay chain. Only the radium and protactinium peaks correspond to isotopes which are before radon in the decay chain. The results are summed up in table \ref{graniteaverages}. and in figure \ref{graniteaveragesfig}.
+		\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Group & Activity [$Bq$] & Activity error [$Bq$] \\
+			\hline
+            $^{214}\text{Pb}$ & 5282 & 244 \\
+            $^{214}\text{Bi}$ & 5614 & 367 \\
+            Before $^{222}\text{Rn}$ & 12012 & 957 \\
+            After $^{222}\text{Rn}$ & 5384 & 203 \\
+            \hline
+		\end{tabular}
+		\caption{Averaged activities of the granite sample}
+		\label{graniteaverages}
+		\end{table}
+		\begin{figure}
+			\centering
+			\includegraphics[scale=1]{./figs/graniteactivities.pdf}
+			\caption{Graphical representation of activities and errors corresponding to peaks and their averages.}
+			\label{graniteaveragesfig}
+		\end{figure}
 	\section{Soil sample}
 		\begin{table}[H]
 		\centering
