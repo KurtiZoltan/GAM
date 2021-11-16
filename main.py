@@ -146,3 +146,24 @@ plt.grid()
 plt.ylabel("A [$Bq$]")
 plt.savefig("./figs/graniteactivities.pdf")
 plt.show()
+
+escapeRatio = (beforeRn - afterRn) / beforeRn
+descapeRatio = afterRn / beforeRn * np.sqrt((dbeforeRn / beforeRn)**2 + (dafterRn / afterRn)**2)
+print("Radon escape ratio: ", escapeRatio, "+/-", descapeRatio)
+
+T12 = 1.41e17
+decayRate = np.log(2) / T12
+N = beforeRn / decayRate
+dN = dbeforeRn / decayRate
+print(f"# U238: {N:.2e}+/-{dN:.1e}")
+mol = 6.02214076e23
+amass = 238.051
+mass = N / mol * amass
+dmass = dN / mol * amass
+print(f"U238 mass: {mass:.3f}+/-{dmass:.3f}")
+
+lambda238 = decayRate
+lambda235 = np.log(2) / (7.04e8 * 365 * 24 * 3600)
+
+print("235 contribution to 186keV peak:", 0.007 * lambda235 / (0.007 * lambda235 + 0.993 * lambda238))
+print("186keV peak rel. error:", granitePeaks[2, 1] / granitePeaks[2, 0])

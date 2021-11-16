@@ -155,7 +155,7 @@
 		\end{equation}
 		The uncertainty of this averaged number is
 		\begin{equation}
-			\sigma(\langle A\rangle) = \frac{1}{\sqrt{\sum_i 1 / \sigma_i^2}}.
+			\sigma_A = \frac{1}{\sqrt{\sum_i 1 / \sigma_i^2}}.
 		\end{equation}
 		With the above formula I determined the combined activity of the lead and bismuth isotopes. To determine if a significant fraction of the radon gas escapes the granite sample I also calculated the weighted average of the isotopes before and after the radon in the decay chain. Only the radium and protactinium peaks correspond to isotopes which are before radon in the decay chain. The results are summed up in table \ref{graniteaverages}. and in figure \ref{graniteaveragesfig}.
 		\begin{table}[H]
@@ -179,6 +179,30 @@
 			\caption{Graphical representation of activities and errors corresponding to peaks and their averages.}
 			\label{graniteaveragesfig}
 		\end{figure}
+		From figure \ref{graniteaveragesfig}. it can be seen that the error in the activity corresponding to the $186keV$ radium peak and the $1001keV$ protactinium peak is large compared to their difference. This means the amount of $^{235}\text{U}$, which would contribute to the $186keV$ peak can not be determined from this measurement. $0.7 \%$ $^{235}\text{U}$ contributes
+		\begin{equation}
+			\frac{0.7 \% \lambda_{235}}{0.7 \% \lambda_{235} + 99.3 \% \lambda_{238}} = 4.3 \%
+		\end{equation}
+		to the $186keV$ peak. The relative error in the activity of the $186keV$ peak is $9.2\%$. This means $0.7\%$ $^{235}\text{U}$ is consistent with the measurement, any concentration between $0\%$ and roughly $2\%$ is.
+		
+		Based on the averaged activity before and after the radon, we can estimate the amount of radon gas that escapes the rock sample before decaying.
+		\begin{equation}
+			r = \frac{A_1 - A_2}{A_1},
+		\end{equation}
+		where $r$ is the ratio of radon gas that escapes before decaying, $A_1$ and $A_2$ are the averaged activities measured from elements before and after the radon in the decay chain, respectively. The error of this ratio is given by
+		\begin{equation}
+			\sigma_r = \sigma\left(1 - \frac{A_2}{A_1}\right) = \frac{A_2}{A_1}\sqrt{\left(\frac{\sigma_{A_1}}{A_1}\right)^2 + \left(\frac{\sigma_{A_2}}{A_2}\right)^2}.
+		\end{equation}
+		The result of this calculation is that $(55.2\pm4.0)\%$ of the radon gas escapes the granite sample before decaying.
+		
+		From the activity of the isotopes before the radon gas the amount of $^{238}\text{U}$ can be calculated using its decay rate. This is because those isotopes are guaranteed to be in secular equilibrium granted the rock formed sufficiently long ago.
+		\begin{equation}
+			N = \frac{A}{\lambda},
+		\end{equation}
+		\begin{equation}
+			\sigma_N = \frac{\sigma_A}{\lambda},
+		\end{equation}
+		where $\lambda = \frac{\log(2)}{T_{1/2}} = 4.92\cdot 10^{-18}\frac{1}{s}$ is the decay rate of $^{238}\text{U}$. From this the number of $^{238}\text{U}$ atoms in the granite sample is $(2.44\pm0.19)\cdot 10^{21}$, which corresponds to a mass of $(0.966\pm0.077)g$ $^{238}\text{U}$ in the granite sample. With the mass of the granite sample The concentration of $^{238}\text{U}$ could be given in gram/ton units.
 	\section{Soil sample}
 		\begin{table}[H]
 		\centering
