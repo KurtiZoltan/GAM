@@ -77,7 +77,7 @@ eta = np.array([
     [1.765, 45.18e-4, 8.758e-2],
 ]).transpose()
 
-def intensity(x, t):
+def activity(x, t):
     I = x[:,1] / (x[:,3] * x[:,4] * t)
     dI = I * np.sqrt(x[:,2]**2 + x[:,5]**2)
     return np.array([I, dI]).transpose()
@@ -92,7 +92,7 @@ print("Soil data:")
 printTable(soil, soilElements)
 
 def printPeakActivity(data, t, dataElements):
-    A = intensity(data, t)
+    A = activity(data, t)
     for row, isotope, a in zip(data, dataElements, A):
         print(f"            ${row[0]:.1f}$ & ${a[0]/1000:.1f}$ & ${a[1]/1000:.1f}$ & {isotope} \\\\")
 
@@ -100,14 +100,14 @@ print("Granite peaks:")
 printPeakActivity(granite, graniteTime, graniteElements)
 
 def printPeakActivity(data, t, dataElements):
-    A = intensity(data, t)
+    A = activity(data, t)
     for row, isotope, a in zip(data, dataElements, A):
         print(f"            ${row[0]:.1f}$ & ${a[0]:.1f}$ & ${a[1]:.1f}$ & {isotope} \\\\")
 
 print("Soil peaks:")
 printPeakActivity(soil, soilTime, soilElements)
 
-granitePeaks = intensity(granite, graniteTime)
+granitePeaks = activity(granite, graniteTime)
 pbPeaks = np.array([granitePeaks[0], granitePeaks[3], granitePeaks[6]])
 biPeaks = np.array([granitePeaks[4], granitePeaks[5]])
 beforeRnPeaks = np.array([granitePeaks[1], granitePeaks[2]])
@@ -161,6 +161,7 @@ amass = 238.051
 mass = N / mol * amass
 dmass = dN / mol * amass
 print(f"U238 mass: {mass:.3f}+/-{dmass:.3f}")
+print(mass/280*1e6, dmass/280*1e6)
 
 lambda238 = decayRate
 lambda235 = np.log(2) / (7.04e8 * 365 * 24 * 3600)
@@ -168,7 +169,7 @@ lambda235 = np.log(2) / (7.04e8 * 365 * 24 * 3600)
 print("235 contribution to 186keV peak:", 0.007 * lambda235 / (0.007 * lambda235 + 0.993 * lambda238))
 print("186keV peak rel. error:", granitePeaks[2, 1] / granitePeaks[2, 0])
 
-soilPeaks = intensity(soil, soilTime)
+soilPeaks = activity(soil, soilTime)
 eu, deu = average(soilPeaks[1:])
 
 plt.errorbar(np.arange(soilPeaks.shape[0]-1), soilPeaks[1:, 0], yerr=soilPeaks[1:, 0], fmt="o", label="Europium peaks' activity")
@@ -181,3 +182,18 @@ plt.savefig("./figs/soilactivities.pdf")
 plt.show()
 
 print(f"Europium {eu}+/-{deu}")
+
+I235 = 0.54
+IRa226 = 3.28000e-2
+Atemp = activity(np.array([[186.69, 12230, 1.11e-2, I235, 313.71e-4, 9.099e-2]]), 1000)
+APa = activity(np.array([[999.07, 620, 14.24e-2, 5.89230e-3 ,  84.57e-4, 7.572e-2]]), 1000)
+AU235 = Atemp[0, 0] - IRa226 / I235 * APa[0, 0]
+dAU235 = np.sqrt(Atemp[0, 1]**2 + (IRa226 / I235 * APa[0, 1])**2)
+print(Atemp)
+print(APa * IRa226 / I235)
+multiplier = 235 / mol / lambda235
+print(f"Measured U-235 mass: {AU235*multiplier:.4f}+/-{dAU235*multiplier:.4f}")
+print(dAU235 / AU235)
+
+print(I235 / IRa226)
+print(np.sqrt(9.2**2 + 16.1**2)/4.3/16)
