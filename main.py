@@ -15,7 +15,7 @@ graniteTime = 1000
 #energy (keV), net area, net area rel. error, I, eta, eta rel. error
 granite = np.array([
     [351.32, 36043, 0.59e-2, 3.68936e-1, 219.75e-4, 9.045e-2], #214Pb
-    [999.07, 620, 14.24e-2, 5.89230e-3 ,  84.57e-4, 7.572e-2], #234Pa
+    [999.07, 620, 14.24e-2, 8.32e-3 ,  84.57e-4, 7.572e-2], #234Pa
     [186.69, 12230, 1.11e-2, 3.28000e-2, 313.71e-4, 9.099e-2], #226Ra
     [294.96, 23525, 0.88e-2, 1.91873e-1, 204.25e-4, 6.595e-2], #214Pb
     [1765.08, 4430, 1.91e-2, 1.61967e-1, 45.18e-4, 8.758e-2], #214Bi 
@@ -108,6 +108,7 @@ print("Soil peaks:")
 printPeakActivity(soil, soilTime, soilElements)
 
 granitePeaks = activity(granite, graniteTime)
+papeak = np.array([granitePeaks[1]])
 pbPeaks = np.array([granitePeaks[0], granitePeaks[3], granitePeaks[6]])
 biPeaks = np.array([granitePeaks[4], granitePeaks[5]])
 beforeRnPeaks = np.array([granitePeaks[1], granitePeaks[2]])
@@ -122,15 +123,17 @@ pb, dpb = average(pbPeaks)
 print("Pb: ", pb, "+/-", dpb)
 bi, dbi = average(biPeaks)
 print("Bi: ", bi, "+/-", dbi)
-beforeRn, dbeforeRn = average(beforeRnPeaks)
-print("Before Rn: ", beforeRn, "+/-", dbeforeRn)
+#beforeRn, dbeforeRn = average(beforeRnPeaks)
+#print("Before Rn: ", beforeRn, "+/-", dbeforeRn)
+pa = papeak[0, 0]
+dpa = papeak[0, 1]
 afterRn, dafterRn = average(afterRnPeaks)
 print("After Rn-: ", afterRn, "+/-", dafterRn)
 
 print("Table of averages for granite:")
 print(f"            $^{{214}}\\text{{Pb}}$ & {pb:.0f} & {dpb:.0f} \\\\")
 print(f"            $^{{214}}\\text{{Bi}}$ & {bi:.0f} & {dbi:.0f} \\\\")
-print(f"            Before $^{{222}}\\text{{Rn}}$ & {beforeRn:.0f} & {dbeforeRn:.0f} \\\\")
+print(f"            $^{{234}}\\text{{Pa}}$ & {pa:.0f} & {dpa:.0f} \\\\")
 print(f"            After $^{{222}}\\text{{Rn}}$ & {afterRn:.0f} & {dafterRn:.0f} \\\\")
 
 plt.errorbar(np.arange(0, pbPeaks.shape[0]), pbPeaks[:, 0], yerr=pbPeaks[:, 1], fmt="o", label="Lead peaks' activity")
@@ -140,33 +143,33 @@ plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 1, bi, yerr=dbi, fmt="o", lab
 plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 2, afterRn, yerr=dafterRn, fmt="o", label="Averaged activity after radon")
 plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 3, granitePeaks[1, 0], yerr=granitePeaks[1, 1], fmt="o", label="Protactinium activity")
 plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 4, granitePeaks[2, 0], yerr=granitePeaks[2, 1], fmt="o", label="Radium activity")
-plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 5, beforeRn, yerr=dbeforeRn, fmt="o", label="Averaged activity before radon")
+#plt.errorbar(biPeaks.shape[0] + pbPeaks.shape[0] + 5, beforeRn, yerr=dbeforeRn, fmt="o", label="Averaged activity before radon")
 plt.legend()
 plt.grid()
 plt.ylabel("A [$Bq$]")
 plt.savefig("./figs/graniteactivities.pdf")
 plt.show()
 
-escapeRatio = (beforeRn - afterRn) / beforeRn
-descapeRatio = afterRn / beforeRn * np.sqrt((dbeforeRn / beforeRn)**2 + (dafterRn / afterRn)**2)
+escapeRatio = (pa - afterRn) / pa
+descapeRatio = afterRn / pa * np.sqrt((dpa / pa)**2 + (dafterRn / afterRn)**2)
 print("Radon escape ratio: ", escapeRatio, "+/-", descapeRatio)
 
 T12 = 1.41e17
 decayRate = np.log(2) / T12
-N = beforeRn / decayRate
-dN = dbeforeRn / decayRate
+N = pa / decayRate
+dN = dpa / decayRate
 print(f"# U238: {N:.2e}+/-{dN:.1e}")
 mol = 6.02214076e23
 amass = 238.051
 mass = N / mol * amass
 dmass = dN / mol * amass
 print(f"U238 mass: {mass:.3f}+/-{dmass:.3f}")
-print(mass/280*1e6, dmass/280*1e6)
+print("g/ton U238 content", mass/280*1e6, dmass/280*1e6)
 
 lambda238 = decayRate
 lambda235 = np.log(2) / (7.04e8 * 365 * 24 * 3600)
 
-print("235 contribution to 186keV peak:", 0.007 * lambda235 / (0.007 * lambda235 + 0.993 * lambda238))
+print("235 contribution to 186keV peak:", 0.007 * lambda235 / (0.007 * lambda235 + 0.993 * lambda238), "%")
 print("186keV peak rel. error:", granitePeaks[2, 1] / granitePeaks[2, 0])
 
 soilPeaks = activity(soil, soilTime)
@@ -186,14 +189,27 @@ print(f"Europium {eu}+/-{deu}")
 I235 = 0.54
 IRa226 = 3.28000e-2
 Atemp = activity(np.array([[186.69, 12230, 1.11e-2, I235, 313.71e-4, 9.099e-2]]), 1000)
-APa = activity(np.array([[999.07, 620, 14.24e-2, 5.89230e-3 ,  84.57e-4, 7.572e-2]]), 1000)
+APa = activity(np.array([[999.07, 620, 14.24e-2, 8.32e-3 ,  84.57e-4, 7.572e-2]]), 1000)
 AU235 = Atemp[0, 0] - IRa226 / I235 * APa[0, 0]
 dAU235 = np.sqrt(Atemp[0, 1]**2 + (IRa226 / I235 * APa[0, 1])**2)
-print(Atemp)
-print(APa * IRa226 / I235)
 multiplier = 235 / mol / lambda235
-print(f"Measured U-235 mass: {AU235*multiplier:.4f}+/-{dAU235*multiplier:.4f}")
-print(dAU235 / AU235)
+mU235 = AU235*multiplier
+dmU235 = dAU235*multiplier
+print(f"Measured U-235 mass: {mU235:.4f}+/-{dmU235:.4f}")
+fraction = mU235/(mass+mU235)
+dfraction = fraction * np.sqrt((dmU235 / mU235)**2 + (dmU235**2 + dmass**2)/(mU235 + mass)**2)
+print(f"U235/U mass% {100*fraction:f}%+/-{100*dfraction:f}%")
 
-print(I235 / IRa226)
-print(np.sqrt(9.2**2 + 16.1**2)/4.3/16)
+widthData = np.array([
+    [349.11, 354.40, 2.27],
+    [992.90, 1006.15, 4.46],
+    [184.85, 188.82, 2.04],
+    [290.82, 298.77, 2.03],
+    [1754.59, 1774.46, 6.67],
+    [1110.80, 1125.37, 4.50],
+    [237.83, 245.78, 2.06],
+])
+
+temp = (widthData[:, 1] - widthData[:, 0]) / widthData[:, 2]
+temp /= temp[2]
+print(temp)

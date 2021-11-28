@@ -110,13 +110,13 @@
 			Energy [$keV$] & Net area & Net area   & Intensity & $\eta$ & $\eta$ rel. & Isotope \\
 			               &          & rel. error &           &        & error       &         \\
 			\hline
-            $351.3$ & $36043$ & $0.6\%$ & 3.689e-01 & $2.1975\%$ & $9.0\%$ & $^{214}\text{Pb}$ \\
-            $999.1$ & $620$ & $14.2\%$ & 5.892e-03 & $0.8457\%$ & $7.6\%$ & $^{234}\text{Pa}$ \\
-            $186.7$ & $12230$ & $1.1\%$ & 3.280e-02 & $3.1371\%$ & $9.1\%$ & $^{226}\text{Ra}$ \\
-            $295.0$ & $23525$ & $0.9\%$ & 1.919e-01 & $2.0425\%$ & $6.6\%$ & $^{214}\text{Pb}$ \\
-            $1765.1$ & $4430$ & $1.9\%$ & 1.620e-01 & $0.4518\%$ & $8.8\%$ & $^{214}\text{Bi}$ \\
-            $1118.6$ & $5706$ & $2.0\%$ & 1.550e-01 & $0.7023\%$ & $9.3\%$ & $^{214}\text{Bi}$ \\
-            $242.1$ & $10554$ & $1.7\%$ & 7.453e-02 & $2.6091\%$ & $8.7\%$ & $^{214}\text{Pb}$ \\
+            $351.3$ & $36043$ & $0.6\%$ & 3.689e-01 & $2.198\%$ & $9.0\%$ & $^{214}\text{Pb}$ \\
+            $999.1$ & $620$ & $14.2\%$ & 8.320e-03 & $0.846\%$ & $7.6\%$ & $^{234}\text{Pa}$ \\
+            $186.7$ & $12230$ & $1.1\%$ & 3.280e-02 & $3.137\%$ & $9.1\%$ & $^{226}\text{Ra}$ \\
+            $295.0$ & $23525$ & $0.9\%$ & 1.919e-01 & $2.042\%$ & $6.6\%$ & $^{214}\text{Pb}$ \\
+            $1765.1$ & $4430$ & $1.9\%$ & 1.620e-01 & $0.452\%$ & $8.8\%$ & $^{214}\text{Bi}$ \\
+            $1118.6$ & $5706$ & $2.0\%$ & 1.550e-01 & $0.702\%$ & $9.3\%$ & $^{214}\text{Bi}$ \\
+            $242.1$ & $10554$ & $1.7\%$ & 7.453e-02 & $2.609\%$ & $8.7\%$ & $^{214}\text{Pb}$ \\
 			\hline
 		\end{tabular}
 		\caption{Granite sample data}
@@ -139,7 +139,7 @@
 			Energy [$keV$] & Activity [$kBq$]& Activity error [$kBq$]& Isotope \\
 			\hline
             $351.3$ & $4.4$ & $0.4$ & $^{214}\text{Pb}$ \\
-            $999.1$ & $12.4$ & $2.0$ & $^{234}\text{Pa}$ \\
+            $999.1$ & $8.8$ & $1.4$ & $^{234}\text{Pa}$ \\
             $186.7$ & $11.9$ & $1.1$ & $^{226}\text{Ra}$ \\
             $295.0$ & $6.0$ & $0.4$ & $^{214}\text{Pb}$ \\
             $1765.1$ & $6.1$ & $0.5$ & $^{214}\text{Bi}$ \\
@@ -158,7 +158,7 @@
 		\begin{equation}
 			\sigma_A = \frac{1}{\sqrt{\sum_i 1 / \sigma_i^2}}.
 		\end{equation}
-		With the above formula I determined the combined activity of the lead and bismuth isotopes. To determine if a significant fraction of the radon gas escapes the granite sample I also calculated the weighted average of the isotopes before and after the radon in the decay chain. Only the radium and protactinium peaks correspond to isotopes which are before radon in the decay chain. The results are summed up in table \ref{graniteaverages}. and in figure \ref{graniteaveragesfig}.
+		With the above formula I determined the combined activity of the lead and bismuth isotopes. To determine if a significant fraction of the radon gas escapes the granite sample I also calculated the weighted average of the isotope after the radon in the decay chain and compared it to the protactinium peak. I did not use the $186keV$ peak in this calculation because significant area of the $186keV$ peak corresponds to $^{235}\text{U}$. The results are summed up in table \ref{graniteaverages}. and in figure \ref{graniteaveragesfig}.
 		\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|}
@@ -167,7 +167,7 @@
 			\hline
             $^{214}\text{Pb}$ & 5282 & 244 \\
             $^{214}\text{Bi}$ & 5614 & 367 \\
-            Before $^{222}\text{Rn}$ & 12012 & 957 \\
+            $^{234}\text{Pa}$ & 8812 & 1421 \\
             After $^{222}\text{Rn}$ & 5384 & 203 \\
             \hline
 		\end{tabular}
@@ -180,13 +180,33 @@
 			\caption{Graphical representation of activities and errors corresponding to peaks and their averages.}
 			\label{graniteaveragesfig}
 		\end{figure}
-		From figure \ref{graniteaveragesfig}. it can be seen that the error in the activity corresponding to the $186keV$ radium peak and the $1001keV$ protactinium peak is large compared to their difference. This means the amount of $^{235}\text{U}$, which would contribute to the $186keV$ peak can not be determined from this measurement. $0.7 \%$ $^{235}\text{U}$ contributes
-		\begin{equation}
-			\frac{0.7 \% \lambda_{235}}{0.7 \% \lambda_{235} + 99.3 \% \lambda_{238}} = 4.3 \%
-		\end{equation}
-		to the $186keV$ peak. The relative error in the activity of the $186keV$ peak is $9.2\%$ and $16.1\%$ for the $1001keV$ peak. The intensity corresponding to the $^{235}\text{U}$ is roughly 16 times larger compared to the $186keV$ emission of $^{226}\text{Ra}$. Based on these numbers a rough estimate for the most amount of $^{235}\text{U}$ consistent with the measured data is $\sqrt{9.2\%^2 + 16.1\%^2} / 4.3\% / 16 = 0.27\%$. However this does not account for any systematic errors. One possible error I could think of is that the region of interest selected was too small for the $186keV$ peak. The region of interest was from $184.85keV$ to $188.82$, the FWHM was $2.04keV$ and the centroid $186.69keV$. Based on this data at least some of the error is likely explained by a too small region of interest, as for other peaks the region width and FWHM ratio was higher. Other sources of error could be unaccounted differences in $\mu$, as the the Monte-Carlo simulation did miss some of the details of the setup.
 		
-		With more precise data the $^{235}\text{U}$ content could be calculated the following way. The activity of protactinium and radium is the same as they are both isotopes before radon in the decay chain. However the $186keV$ peak corresponding to radium gets contribution from the decay chain of $^{235}\text{U}$. Based on the difference the $^{235}\text{U}$ content can be determined. It is important that the difference is taken between the measured and expected net areas. This is because the intensity corresponding to the $186keV$ peak is different for radium and the $^{235}\text{U}$ decay chain. Following this logic, the expected net area corresponding to $^{226}\text{Ra}$ is
+		%From figure \ref{graniteaveragesfig}. it can be seen that the error in the activity corresponding to the $186keV$ radium peak and the $1001keV$ protactinium peak is large compared to their difference. This means the amount of $^{235}\text{U}$, which would contribute to the $186keV$ peak can not be determined from this measurement. $0.7 \%$ $^{235}\text{U}$ contributes
+		%\begin{equation}
+		%	\frac{0.7 \% \lambda_{235}}{0.7 \% \lambda_{235} + 99.3 \% \lambda_{238}} = 4.3 \%
+		%\end{equation}
+		%to the $186keV$ peak. The relative error in the activity of the $186keV$ peak is $9.2\%$ and $16.1\%$ for the $1001keV$ peak. The intensity corresponding to the $^{235}\text{U}$ is roughly 16 times larger compared to the $186keV$ emission of $^{226}\text{Ra}$. Based on these numbers a rough estimate for the most amount of $^{235}\text{U}$ consistent with the measured data is $\sqrt{9.2\%^2 + 16.1\%^2} / 4.3\% / 16 = 0.27\%$. However this does not account for any systematic errors. One possible error I could think of is that the region of interest selected was too small for the $186keV$ peak. The region of interest was from $184.85keV$ to $188.82$, the FWHM was $2.04keV$ and the centroid $186.69keV$. Based on this data at least some of the error is likely explained by a too small region of interest, as for other peaks the region width and FWHM ratio was higher. Other sources of error could be unaccounted differences in $\mu$, as the the Monte-Carlo simulation did miss some of the details of the setup.
+		
+		We can estimate the amount of radon gas that escapes the rock sample before decaying.
+		\begin{equation}
+			r = \frac{A_1 - A_2}{A_1},
+		\end{equation}
+		where $r$ is the ratio of radon gas that escapes before decaying, $A_1$ and $A_2$ are the averaged activities measured from elements before and after the radon in the decay chain, respectively. The error of this ratio is given by
+		\begin{equation}
+			\sigma_r = \sigma\left(1 - \frac{A_2}{A_1}\right) = \frac{A_2}{A_1}\sqrt{\left(\frac{\sigma_{A_1}}{A_1}\right)^2 + \left(\frac{\sigma_{A_2}}{A_2}\right)^2}.
+		\end{equation}
+		The result of this calculation is that $(38.9\pm1.0)\%$ of the radon gas escapes the granite sample before decaying.
+		
+		From the activity of protactinium, which is before the radon gas, the amount of $^{238}\text{U}$ can be calculated using its decay rate. This is because this isotopes is guaranteed to be in secular equilibrium granted the rock formed sufficiently long ago. The peak corresponding to radium can not be used, because $^{235}\text{U}$ also has a peak at $186keV$.
+		\begin{equation}
+			N = \frac{A}{\lambda},
+		\end{equation}
+		\begin{equation}
+			\sigma_N = \frac{\sigma_A}{\lambda},
+		\end{equation}
+		where $\lambda = \frac{\log(2)}{T_{1/2}} = 4.92\cdot 10^{-18}\frac{1}{s}$ is the decay rate of $^{238}\text{U}$. From this the number of $^{238}\text{U}$ atoms in the granite sample is $(1.79\pm0.29)\cdot 10^{21}$, which corresponds to a mass of $(0.71\pm0.11)g$ $^{238}\text{U}$ in the granite sample. Knowing that the mass of the granite sample was $280g$, the $^{238}\text{U}$ concentration of the sample is $(2530\pm410)g/ton$.
+		
+		The $^{235}\text{U}$ content can be calculated the following way. The activity of protactinium and radium is the same as they are both isotopes before radon in the decay chain. However the $186keV$ peak corresponding to radium gets contribution from the decay chain of $^{235}\text{U}$. Based on the difference the $^{235}\text{U}$ content can be determined. It is important that the difference is taken between the measured and expected net areas. This is because the intensity corresponding to the $186keV$ peak is different for radium and the $^{235}\text{U}$ decay chain. Following this logic, the expected net area corresponding to $^{226}\text{Ra}$ is
 		\begin{equation}
 			N_{\text{Ra}-226} = N_{\text{Pa}-234}\frac{I_{\text{Ra}-226}\mu_{186keV}}{I_{\text{Pa}-234}{\mu_{1001keV}}}.
 		\end{equation}
@@ -198,26 +218,7 @@
 		\begin{equation}
 			A_{\text{U}-235} = \frac{N_{235}}{I_{\text{U}-235}\mu_{186keV} t} = \frac{N_{186keV}}{I_{\text{U}-235}\mu_{186keV} t} - \frac{I_{\text{Ra}-226}}{I_{\text{U}-235}}\frac{N_{\text{Pa}-234}}{I_{\text{Pa}-234}\mu_{1001keV} t}.
 		\end{equation}
-		This gives $^{235}\text{U}$ content of $m_{235} = (-0.0004\pm0.0017)g$. Obviously the isotope content of a sample can't have negative mass, meaning based on this calculation the expected $^{235}\text{U}$ content of the sample is between $0g$ and $0.0013g$. This calculation does not account for possible sources of errors mentioned in the previous paragraph either, the main suspect being a too narrow selection for the region of interest around the $186keV$ peak.
-		
-		Based on the averaged activity before and after the radon, we can estimate the amount of radon gas that escapes the rock sample before decaying.
-		\begin{equation}
-			r = \frac{A_1 - A_2}{A_1},
-		\end{equation}
-		where $r$ is the ratio of radon gas that escapes before decaying, $A_1$ and $A_2$ are the averaged activities measured from elements before and after the radon in the decay chain, respectively. The error of this ratio is given by
-		\begin{equation}
-			\sigma_r = \sigma\left(1 - \frac{A_2}{A_1}\right) = \frac{A_2}{A_1}\sqrt{\left(\frac{\sigma_{A_1}}{A_1}\right)^2 + \left(\frac{\sigma_{A_2}}{A_2}\right)^2}.
-		\end{equation}
-		The result of this calculation is that $(55.2\pm4.0)\%$ of the radon gas escapes the granite sample before decaying.
-		
-		From the activity of the isotopes before the radon gas the amount of $^{238}\text{U}$ can be calculated using its decay rate. This is because those isotopes are guaranteed to be in secular equilibrium granted the rock formed sufficiently long ago.
-		\begin{equation}
-			N = \frac{A}{\lambda},
-		\end{equation}
-		\begin{equation}
-			\sigma_N = \frac{\sigma_A}{\lambda},
-		\end{equation}
-		where $\lambda = \frac{\log(2)}{T_{1/2}} = 4.92\cdot 10^{-18}\frac{1}{s}$ is the decay rate of $^{238}\text{U}$. From this the number of $^{238}\text{U}$ atoms in the granite sample is $(2.44\pm0.19)\cdot 10^{21}$, which corresponds to a mass of $(0.966\pm0.077)g$ $^{238}\text{U}$ in the granite sample. Knowing that the mass of the granite sample was $280g$, the $^{238}\text{U}$ concentration of the sample is $(3450\pm270)g/ton$.
+		This gives $^{235}\text{U}$ content of $m_{235} = (0.0023\pm0.0014)g$, which is $(0.33\pm0.2)\%$ with respect to the mass of all uranium in the sample.
 	\section{Soil sample}
 		The data of the measured peaks from the soil sample are summarized in table \ref{soildata}.
 		\begin{table}[H]
@@ -264,7 +265,7 @@
 			\label{soilaveragesfig}
 		\end{figure}
 	\section{Conclusion}
-		The lab introduced us to gamma spectroscopy and analyzing the data obtained. In the first part we calibrated the measurement with a thorium sample. The next part was about taking the spectrum of a granite sample and identifying the peaks seen. During evaluation I concluded that a significant portion of the radon gas escapes the sample. The uranium-235 concentration estimated based on the $186keV$ and $1001keV$ peaks is lower than expected. A possible source of this error could be the incorrect selection of the region of interest around the $186keV$ peak. The FWHM to region width ratio was 1.2-2 times as high for the $186keV$ peak as for the other peaks. I also determined the uranium content of the sample. Finally I repeated some of the calculations for a soil sample from near a nuclear bomb test.
+		The lab introduced us to gamma spectroscopy and analyzing the data obtained. In the first part we calibrated the measurement with a thorium sample. The next part was about taking the spectrum of a granite sample and identifying the peaks seen. During evaluation I concluded that a significant portion of the radon gas escapes the sample. The uranium-235 concentration estimated based on the $186keV$ and $1001keV$ peaks is a bit lower than expected. A possible source of this error could be the incorrect selection of the region of interest around the $186keV$ peak. The FWHM to region width ratio was 1.2-2 times as high for the $186keV$ peak as for the other peaks. I also determined the uranium content of the sample. Finally I repeated some of the calculations for a soil sample from near a nuclear bomb test.
 	\bibliographystyle{abeld}
     %\bibliography{ref}
 \end{document}
